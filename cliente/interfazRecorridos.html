@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interfaz Recorridos</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="interfazRecorridos.css">
+    <script defer src="../backend/pedidos.js"></script>
+</head>
+
+<body>
+    <div class="padre">
+        <div class="barrasuperior">
+            <div class="logo-texto">
+                <img src="../imagenes/LogoTilo2.png" alt="logoempresa" class="logo">
+                <p>SF-DESIGN</p>
+            </div>
+            <div class="user">
+                <img src="https://static.vecteezy.com/system/resources/previews/005/005/837/non_2x/user-icon-in-trendy-flat-style-isolated-on-grey-background-user-symbol-for-your-web-site-design-logo-app-ui-illustration-eps10-free-vector.jpg"
+                    alt="User Icon">
+                <p>user</p>
+            </div>
+        </div>
+        <div class="barralateral">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="./interfazClientes.html">Clientes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./interfazProductos.html">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./interfazRecorridos.html">Recorridos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./interfazListaprecios.html">Lista de precios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Zonas</a>
+                  </li>
+                <li>
+                    <button id="logoutButton" class="btn btn-danger">Logout</button>
+                </li>
+            </ul>
+        </div>
+        <div class="contenido">
+            <!-- Botón para abrir el modal de "Registrar un Nuevo Pedido" -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNuevoPedido">
+                Registrar un Nuevo Pedido
+            </button>
+            <!-- FILTROS  -->
+            <div class="d-flex gap-3 mb-3">
+                <div>
+                    <label for="fechaDesde" class="form-label">Desde:</label>
+                    <input type="date" id="fechaDesde" class="form-control" />
+                </div>
+                <div>
+                    <label for="fechaHasta" class="form-label">Hasta:</label>
+                    <input type="date" id="fechaHasta" class="form-control" />
+                </div>
+                <div class="align-self-end">
+                    <button class="btn btn-primary" onclick="filtrarPedidos()">Filtrar</button>
+                </div>
+            </div>
+            <!-- FILTRO PEDIDOS POR NOMBRE CLIENTE -->
+            <div class="form-group">
+                <label for="myInput">Filtrar por Cliente:</label>
+                <input type="text" id="myInput" class="form-control" placeholder="Escribe el nombre del cliente">
+            </div>
+            <!-- FILTRO POR ESTADO -->
+            <div class="form-group">
+                <label for="estadoPedido">Filtrar por Estado:</label>
+                <select id="estadoPedido" class="form-control">
+                    <option value="">Selecciona un estado</option>
+                    <option value="1">Pendiente</option>
+                    <option value="2">Entregado</option>
+                    <option value="3">Cancelado</option>
+                </select>
+            </div>
+            <!-- Botón para Filtrar Pedidos -->
+            <button class="btn btn-primary" onclick="filtrarPedidosPorCliente()">Filtrar Pedidos</button>
+
+            <!-- Modal para Registrar Pedido -->
+            <div class="modal fade" id="modalNuevoPedido" tabindex="-1" aria-labelledby="modalNuevoPedidoLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalNuevoPedidoLabel">Registrar Nuevo Pedido</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formNuevoPedido">
+                                <div class="mb-3">
+                                    <label for="clienteSelect" class="form-label">Cliente</label>
+                                    <select id="clienteSelect" class="form-select" required>
+
+                                        <!-- Aquí se agregarán dinámicamente los clientes -->
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="direccion" class="form-label">Dirección</label>
+                                    <input type="text" id="direccion" class="form-control" required readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fechaPedido" class="form-label">Fecha Solicitada</label>
+                                    <input type="date" id="fechaPedido" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="productoSelect" class="form-label">Productos</label>
+                                    <li id="productoSelect" class="form-select" required>
+
+                                        <!-- Aquí se agregarán dinámicamente los productos -->
+                                    </li>
+                                </div>
+
+                                <div class="cantidad1" id="cantidad1">
+
+                                </div>
+                                <textarea id="productosSeleccionados" readonly></textarea>
+
+                                <div class="mb-3">
+                                    <p id="montoTotal">Monto Total: $0.00</p>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                                onclick="borrarSeleccion()">Cancelar</button>
+                            <button type="button" class="btn btn-primary" onclick="registrarPedido()">Registrar
+                                Pedido</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="table" id="tablaPedidos">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Dirección</th>
+                        <th>Fecha Solicitada</th>
+                        <th>Total</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se agregarán dinámicamente los pedidos -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal para Modificar Pedido -->
+    <div class="modal fade" id="modalModificarPedido" tabindex="-1" aria-labelledby="modalModificarPedidoLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalModificarPedidoLabel">Modificar Pedido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formModificarPedido">
+                        <div class="mb-3">
+                            <label for="modificarClienteSelect" class="form-label">Cliente</label>
+                            <select id="modificarClienteSelect" class="form-select" required>
+                                <!-- Aquí se agregarán dinámicamente los clientes -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modificarDireccion" class="form-label">Dirección</label>
+                            <input type="text" id="modificarDireccion" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modificarFechaPedido" class="form-label">Fecha Solicitada</label>
+                            <input type="date" id="modificarFechaPedido" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modificarEstadoPedido" class="form-label">Estado del Pedido</label>
+                            <select id="modificarEstadoPedido" class="form-select" required>
+                                <option value="">Seleccionar estado</option>
+                                <option value="1">Pendiente</option>
+                                <option value="2">Entregado</option>
+                                <option value="3">Cancelado</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="modificarProductoSelect" class="form-label">Productos</label>
+                            <select id="modificarProductoSelect" class="form-select" multiple required>
+                                <!-- Aquí se agregarán dinámicamente los productos -->
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <p id="modificarMontoTotal">Monto Total: $0.00</p>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="guardarCambiosPedido()">Guardar
+                        Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="modal" id="detallePedidoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detalles del Pedido</h5>
+                    <button type="button" class="close" onclick="cerrarModal()">&times;</button>
+                </div>
+                <div class="modal-body" id="detallePedidoContent">
+                    <!-- Aquí se llenarán los detalles dinámicamente -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

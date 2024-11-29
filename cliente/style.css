@@ -1,0 +1,119 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+/* NAVBAR */
+.barrasuperior { 
+    background-color: #365486;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#titulonavabar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1; /* Esto permite que el título ocupe el espacio disponible */
+    text-align: center;
+    margin-right: 20px; /* Ajusta este valor según sea necesario */
+}
+
+
+
+.nav-link{
+    color: white;
+}
+
+.container-fluid{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    margin: 10px;
+   
+}
+
+.fotito{
+    position: absolute; 
+    left: 10px; 
+    border-radius: 50px;
+    height: 50px;
+    width: 50px;
+    top: 10px; 
+    left: 10px; 
+}
+
+
+body{
+    background-color: #DCF2F1;
+    padding-top: 90px; /* Ajusta este valor según la altura de tu navbar */
+}
+
+.torso{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.CARD{
+    max-width: 850px;
+    border-radius: 10px;
+    margin: 20px auto;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.img-fluid{
+    border-radius: 10px;
+}
+
+
+.info{
+    display: flex;
+    justify-content: center;
+}
+/* mapa ubicacion */
+.mapaubicacion{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    align-items: center;
+}
+.cardubicacion{
+    background-color: white;
+    margin: 10px auto; /* Auto para centrar horizontalmente */
+    width: 850px; /* Ajusta el tamaño según sea necesario */
+    max-width: 1000px; /* Máximo ancho para limitar el tamaño */
+    padding: 20px; /* Agrega un relleno interno */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px; /* Agrega bordes redondeados */
+
+}
+
+/* CARRUSCEL */
+.carousel-container {
+    background-color: white;
+    max-width: 850px; /* Ajusta el ancho según tus necesidades */
+    margin: 20px auto; /* Centra el contenedor */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    height: 400px;
+  }
+.carousel-inner {
+    max-width: 400px;
+    max-height: 400px; /* Ajusta la altura según tus necesidades */
+    margin: 0 auto; /* Centra el contenedor */
+}
+.carousel-image {
+    width: 100%; /* Asegura que las imágenes llenen el contenedor */
+    height: 100%; /* Asegura que las imágenes llenen el contenedor */
+    object-fit: contain; /* Mantiene la proporción de la imagen y recorta si es necesario */
+}
+
+
+
+  

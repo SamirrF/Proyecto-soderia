@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="interfazClientes.css">
+  <title>Interfaz Clientes</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script defer src="../backend/clientes.js"></script>
+</head>
+
+<body>
+  <div class="padre">
+    <div class="barrasuperior">
+      <div class="logo-texto">
+        <img src="../imagenes/LogoTilo2.png" alt="logoempresa" class="logo">
+        <p>SF-DESIGN</p>
+      </div>
+      <div class="user">
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/005/005/837/non_2x/user-icon-in-trendy-flat-style-isolated-on-grey-background-user-symbol-for-your-web-site-design-logo-app-ui-illustration-eps10-free-vector.jpg"
+          alt="User Icon">
+        <p>user</p>
+      </div>
+    </div>
+    <div class="barralateral">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="./interfazClientes.html">Clientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./interfazProductos.html">Productos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./interfazRecorridos.html">Pedidos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./interfazListaprecios.html">Lista de precios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">Zonas</a>
+        </li>
+        <li>
+          <button id="logoutButton" class="btn btn-danger">Logout</button>
+        </li>
+      </ul>
+
+    </div>
+    <div class="contenido">
+      <h4>Listado de clientes</h4>
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Añadir nuevo cliente +
+      </button>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel"> Añadir nuevo cliente</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <label for="">Nombre y apellido*:</label>
+              <input id="nombreapellido" type="text">
+              <label for="">Direccion*:</label>
+              <input id="direccion" type="text">
+              <label for="">Localidad*:</label>
+              <select name="Localidades" id="localidad">
+                <option value="0" selected disabled>selecione una localidad</option>
+                <option value="1">Villa Nueva</option>
+                <option value="2">Villa Maria</option>
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-success" onclick="Guardarnuevocliente()">Guardar cambios</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h5>Filtro:</h5>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" id="buscarCliente" placeholder="Buscar cliente por nombre">
+      </div>
+      <div class="form-group" class="listadoclientes">
+        <label for="estadoCliente">Filtrar por Estado:</label>
+        <select id="estadoFiltro" class="form-control" title="selectestado">
+          <option value="Todos">Todos</option>
+          <option value="1">Activos</option>
+          <option value="0">Inactivos</option>
+        </select>
+      </div>
+      <div class="tabla-contenedor">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre y Apellido</th>
+              <th>Dirección</th>
+              <th>Localidad</th>
+              <th>Acción</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody id="clientes-list">
+            <!-- Los clientes se agregarán dinámicamente aquí -->
+          </tbody>
+        </table>
+
+        </>
+
+        <!-- Modal para Modificar Cliente -->
+        <div class="modal fade" id="modalModificarCliente" tabindex="-1" aria-labelledby="modalModificarClienteLabel"
+          aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalModificarClienteLabel">Modificar Cliente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <label for="">Nombre y apellido*:</label>
+                <input id="modificarNombre" type="text">
+                <label for="">Direccion*:</label>
+                <input id="modificarDireccion" type="text">
+                <label for="">Localidad*:</label>
+                <select name="Localidades" id="modificarLocalidad">
+                  <option value="0" selected disabled>Seleccione una localidad</option>
+                  <option value="1">Villa Nueva</option>
+                  <option value="2">Villa Maria</option>
+                </select>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="GuardarCambiosCliente()">Guardar cambios</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>

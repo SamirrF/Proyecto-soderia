@@ -1,0 +1,121 @@
+/* styleinterfazUsuario.css */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.padre {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    position: relative;
+}
+
+.barrasuperior {
+    background-color: #365486;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    height: 60px;
+    z-index: 1000; 
+}
+
+.logo-texto {
+    display: flex;
+    align-items: center;
+}
+
+.logo-texto img {
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}
+
+.barrasuperior p {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.user p {
+    margin: 0;
+    font-size: 0.8em;
+    color: white;
+}
+
+.barralateral {
+    background-color: #333;
+    color: white;
+    padding: 2em 1em;
+    width: 200px;
+    height: calc(100vh - 60px); /* Altura total menos la altura de la barra superior */
+    position: fixed;
+    top: 60px;
+    left: 0;
+    box-sizing: border-box; /* Incluye padding y border en el ancho total */
+    z-index: 999; /* Asegura que la barra lateral esté debajo de la barra superior */
+}
+
+.contenido {
+    margin-top: 60px; /* Altura de la barra superior */
+    margin-left: 200px; /* Ancho de la barra lateral */
+    padding: 1em;
+    height: calc(100vh - 60px); /* Altura total menos la altura de la barra superior */
+    overflow-y: auto;
+    box-sizing: border-box; /* Incluye padding y border en el ancho total */
+}
+
+/* tabla para los clientes */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #000; /* Línea de borde alrededor de toda la tabla */
+}
+
+th, td {
+    border: 1px solid #000; /* Líneas de división entre las celdas */
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.form-check-input:checked {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+/* BOTON LOGOUT */
+#logoutButton {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+/* botones checlist */

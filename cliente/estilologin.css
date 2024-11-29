@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+}
+body {
+    background-color: #DCF2F1;
+    padding-top: 60px;
+}
+
+.form-container {
+    height: 100vh;
+    background-color: #DCF2F1;
+}
+
+.botoningresar {
+    background-color: #365486;
+}
